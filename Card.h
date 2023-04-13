@@ -1,11 +1,10 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include <iostream>
-#include <stdlib.h>
+
 #include <vector>
 #include "Player.h"
-using namespace std;
+
 
 
 class Card{

@@ -17,10 +17,7 @@ int main(){
     Player player2("Computer",100);
     Card poker;
     poker.shuffle();
-    for (int i=0; i<52;i++) {
-        cout << i << "\n";
-        cout << poker.card[i] <<"\n";
-    }
+
 
     cout << "Hello " << name1 << endl;
     cout << "Welcome to BlackJack! You have $100 by default." << endl
@@ -31,7 +28,7 @@ int main(){
     while (true){
 
         if (player1.money <= 0) {
-            cout << "You have run out of money."
+            cout << "You have run out of money.";
             break;
         }
 
@@ -73,7 +70,6 @@ int main(){
         poker.secret_deal(player2);
         poker.deal(player1);
         poker.deal(player2);
-        cout << poker.card.size() << "@@@@" <<"\n";
 
 
         player1.list_cards_in_hand();
