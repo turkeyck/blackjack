@@ -27,16 +27,16 @@ using namespace std;
         int card_size = (int) cards_in_hand.size();
         cout <<name <<" has cards ";
         for (int i = 0; i < card_size; i++){
-            cout << cards_in_hand[i] << " ";
+            cout << "[" << cards_in_hand[i] << "]" << " ";
         }
         cout << "\n";
     }
 
     void Player::list_cards_of_computer(){
         int card_size = cards_in_hand.size();
-        cout <<name <<" has cards ";
+        cout <<name <<" has cards ***** and ";
         for (int i = 1; i < card_size; i++){
-            cout <<cards_in_hand[i] << " ";
+            cout << "[" << cards_in_hand[i] << "]" << " ";
         }
         cout << "\n";
     }
@@ -62,10 +62,10 @@ using namespace std;
                 // cout << sc << "!!!!!! 2"<<"\n";
             }
             else{
-                int num = (int) (i[i.size()-1]-'0');
+                // int num = (int) (i[i.size()-1]-'0');
                 // num -= 48;
                 // int num = stoi(i[i.size()-1]);
-                sc += num;
+                sc += (int) (i[i.size()-1]-'0');
                 
                 // cout << sc <<" "<< num<< " !!!!!!  3"<<"\n";
             }
@@ -76,7 +76,7 @@ using namespace std;
             num_A -= 1;
         }
         score = sc;
-        cout << name << " has " << score << " points." << endl;
+        // cout << name << " has " << score << " points." << endl;
 
         return score;
     }

@@ -17,8 +17,10 @@ class Card{
 
     Card();
     void shuffle();
+    void secret_deal(Player &);
     void deal(Player & );
     void recycle_card(Player &) ;
+    void reconstruct();
 };
 
 #endif

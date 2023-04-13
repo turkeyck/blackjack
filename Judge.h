@@ -2,6 +2,6 @@
 #define JUDGE_H
 # include "Player.h"
 bool judge(Player &);
-void judge2(Player &, Player &);
+void judge(Player &, Player &);
 
 #endif

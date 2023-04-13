@@ -17,6 +17,10 @@ int main(){
     Player player2("Computer",100);
     Card poker;
     poker.shuffle();
+    for (int i=0; i<52;i++) {
+        cout << i << "\n";
+        cout << poker.card[i] <<"\n";
+    }
 
     cout << "Hello " << name1 << endl;
     cout << "Welcome to BlackJack! You have $100 by default." << endl
@@ -25,6 +29,13 @@ int main(){
         << "If your money is less than $10, you won't be able to play anymore." << endl;
     
     while (true){
+
+        if (player1.money <= 0) {
+            cout << "You have run out of money."
+            break;
+        }
+
+        
         // Decide the bet
         while (true) {
             int bet;
@@ -52,32 +63,29 @@ int main(){
         if (poker.card.size() < 20){
             poker.recycle_card(player1);
             poker.recycle_card(player2);
-            Card poker = Card();
+            
+            poker.reconstruct();
             poker.shuffle();
-        }
-        poker.deal(player1);
-        poker.deal(player2);
-        poker.deal(player1);
-        poker.deal(player2);
 
-        // cout<<player1.cards_in_hand.size()<<" !!!!!!!!!!! 1\n";
+            }
+        
+        poker.deal(player1);
+        poker.secret_deal(player2);
+        poker.deal(player1);
+        poker.deal(player2);
+        cout << poker.card.size() << "@@@@" <<"\n";
+
 
         player1.list_cards_in_hand();
         player2.list_cards_of_computer();
-        // cout << poker.card.size() << endl;
-        // int len = poker.card[0].size();
-        // cout << poker.card[0][len-1] << endl;
-        // player1.list_cards_in_hand();
-        // break;
+
         
-        // cout<<player1.cards_in_hand.size()<<" !!!!!!!!!!! 2\n";
 
         // Decide whether players want extra cards and judge who wins.
         while (true) {
             char hit_or_stand;
             cout << "Stand or Hit me?" << endl;
             cout <<"Press 1 for stand, 2 for hit me." << endl;
-            // cout<<player1.cards_in_hand.size()<<" !!!!!!!!!!! 3\n";
             cin >> hit_or_stand;
 
             if (hit_or_stand == '1'){
@@ -87,25 +95,32 @@ int main(){
                 }
                 if (judge(player2)) {
                     player1.grab_money(player2);
+                    player2.list_cards_in_hand();
                     cout << "Computer's score exceeds 21, Computer loses." <<endl;
-                    cout << "Computer has lost " << player2.bet << " ," << player2.money << " left." << endl;
-                    cout << "You have won " << player1.bet << " ," << player1.money << " left." << endl;
+                    cout << "Computer has lost $" << player2.bet << " , $" << player2.money << " left." << endl;
+                    cout << "You have won $" << player1.bet << " , $" << player1.money << " left." << endl;
+                    poker.recycle_card(player1);
+                    poker.recycle_card(player2);
+                    
                 }
-                else judge2(player1, player2);
-
-                poker.recycle_card(player1);
-                poker.recycle_card(player2);
+                else {
+                    judge(player1, player2);
+                    poker.recycle_card(player1);
+                    poker.recycle_card(player2);
+                }
+  
                 break;
 
             }
             else if (hit_or_stand == '2'){
                 poker.deal(player1);
+                cout << poker.card.size() << "@@@@3" <<"\n";
                 player1.list_cards_in_hand();
-                player2.list_cards_in_hand();
+                player2.list_cards_of_computer();
                 if (judge(player1)) {
                     player2.grab_money(player1);
                     cout << "Your score exceeds 21, you lose!!!" << endl;
-                    cout << player1.name << "has lost $" << player1.bet << " ,$" << player1.money << " left." << endl;
+                    cout << player1.name << " has lost $" << player1.bet << " ,$" << player1.money << " left." << endl;
                     cout << "Computer has won $" << player2.bet << " ,$" << player2.money << " left." << endl;
                     
                     poker.recycle_card(player1);
@@ -118,11 +133,30 @@ int main(){
         }
         
         // Decide whether want to play again
-        break;
+        char play_again;
+        while (true) {
+            cout << "Do you want to play again? (y/n)" << endl;
+            
+            cin >> play_again;
+            if (cin.fail()) {
+                cout << "Try again. Please enter y or n.";
+                continue;
+            }
 
+            else if (play_again == 'y') {
+                break;
+            }
+            else if (play_again == 'n') {
+                break;
+            }
+        }
 
-
-
+        if (play_again == 'y') {
+            continue;
+        }
+        else if (play_again == 'n') {
+            break;
+        }
     }
     return 0;
 }
