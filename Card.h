@@ -3,24 +3,34 @@
 
 
 #include <vector>
+#include <string>
 #include "Player.h"
-
+using namespace std;
 
 
 class Card{
-    public:
-    vector<string> suit;
-    vector<string> rank;
-    vector<string> card;
-    // vector<string> trash_card;
+    // public:
+    // vector<string> suit;
+    // vector<string> rank;
+    private:
+    string card;
+    
 
-    Card();
-    void shuffle();
-    void secret_deal(Player &);
-    void deal(Player & );
-    void recycle_card(Player &) ;
-    void reconstruct();
+    public:
+    string suit;
+    string rank;
+    Card(string suit, string rank);
+    // std::ostream is the type for object std::cout
+    friend std::ostream& operator<< (std::ostream& out, const Card& );
+
+
+
+
+    // void shuffle();
+    // void secret_deal(Player &);
+    // void deal(Player & );
+    // void recycle_card(Player &) ;
+    // void reconstruct();
 };
 
 #endif
-

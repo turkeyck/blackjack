@@ -5,13 +5,17 @@
 #include <stdlib.h>
 #include <vector>
 #include <string>
+#include "Card.h"
+#include "Deck.h"
 using namespace std;
+
+class Card;
 
 
 class Player{
     public:
     string name;
-    vector<string> cards_in_hand;
+    vector<Card> cards_in_hand;
     int score;
     int money;
     int bet;

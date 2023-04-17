@@ -1,67 +1,24 @@
-// #ifndef CARD_H
-// #define CARD_H
-
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
-#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 #include "Player.h"
 #include "Card.h"
 using namespace std;
 
 
     // create 52 crads
-    Card::Card()
+    Card::Card(string s, string r)
     {
-        // int total = 52;
-        vector<string> suit = {"club", "diamond", "spade", "heart"};
-        vector<string> rank = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-        // vector<string> card ;
-        // vector<string> trash_card;
-        for (string i: suit){
-            for (string j:rank){
-                card.push_back(i+j);
-            }
-        }
-    }
-    void Card::shuffle() {
-        // vector<string> sh_card;
-        // srand(time(NULL));
-        // for (int i=0; i<52; i++){
-        //     int idx = rand() % (52-i) + 1;
-        //     // cout << idx << endl;
-        //     sh_card.push_back(card[idx]);
-        // }
-        // card = sh_card;
-        random_shuffle( card.begin(), card.end() );
-    }
-
-    void Card::secret_deal(Player &p) {
-        cout << p.name << " gets a new card: " << "*****" << endl;
-        p.cards_in_hand.push_back(card[0]);
-        card.erase(card.begin());
+        rank = r;
+        suit = s;
+        card = suit + rank;
     }
 
 
-    void Card::deal(Player &p) {
-        cout << p.name << " gets a new card: " << card[0] << endl;
-        p.cards_in_hand.push_back(card[0]);
-        card.erase(card.begin());
+    // std::ostream is the type for object std::cout
+    std::ostream& operator<< (std::ostream& out, const Card& card){
+        out << card.suit << card.rank ; // actual output done here
+
+    return out; // return std::ostream so we can chain calls to operator<<
     }
-
-    void Card::recycle_card(Player & p) {
-        p.cards_in_hand.clear();
-    }
-
-    void Card::reconstruct() {
-        card.clear();
-        vector<string> suit = {"club", "diamond", "spade", "heart"};
-        vector<string> rank = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-        for (string i: suit){
-            for (string j:rank){
-                card.push_back(i+j);
-            }
-        }
-
-    }
-

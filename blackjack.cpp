@@ -4,6 +4,7 @@
 # include <string>
 # include <cmath>
 # include "Card.h"
+# include "Deck.h"
 # include "Player.h"
 # include "Judge.h"
 using namespace std;
@@ -15,7 +16,7 @@ int main(){
     cin >> name1 ;
     Player player1(name1,100);
     Player player2("Computer",100);
-    Card poker;
+    Deck poker;
     poker.shuffle();
 
 
@@ -27,8 +28,8 @@ int main(){
     
     while (true){
 
-        if (player1.money <= 0) {
-            cout << "You have run out of money.";
+        if (player1.money < 10) {
+            cout << "You have run out of money. You only have $" << player1.money << ", $10 required.";
             break;
         }
 
@@ -57,7 +58,7 @@ int main(){
 
 
         // Deal 2 cards to each player
-        if (poker.card.size() < 20){
+        if (poker.deck.size() < 20){
             poker.recycle_card(player1);
             poker.recycle_card(player2);
             
@@ -89,6 +90,8 @@ int main(){
                     poker.deal(player2);
                     player2.compute_score();
                 }
+
+                
                 if (judge(player2)) {
                     player1.grab_money(player2);
                     player2.list_cards_in_hand();
@@ -100,6 +103,10 @@ int main(){
                     
                 }
                 else {
+                    if (player2.compute_score() == 21) {
+                    player2.grab_money(player2);
+                    player2.grab_money(player2);
+                }
                     judge(player1, player2);
                     poker.recycle_card(player1);
                     poker.recycle_card(player2);
@@ -110,7 +117,6 @@ int main(){
             }
             else if (hit_or_stand == '2'){
                 poker.deal(player1);
-                cout << poker.card.size() << "@@@@3" <<"\n";
                 player1.list_cards_in_hand();
                 player2.list_cards_of_computer();
                 if (judge(player1)) {

@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include "Player.h"
+#include "Card.h"
 using namespace std;
 
 
@@ -20,7 +21,7 @@ using namespace std;
         money = m;
         score = 1;
         bet = 0;
-        cards_in_hand = {};
+        // cards_in_hand = {};
     }
 
     void Player::list_cards_in_hand(){
@@ -49,14 +50,14 @@ using namespace std;
     int Player::compute_score(){
         int num_A = 0;
         int sc = 0;
-        for (string i : cards_in_hand) {
+        for (Card i : cards_in_hand) {
             // cout << sc << "!!!!!!  0"<<"\n";
             // cout << " i[i.size()-1] is " << i[i.size()-1] << endl;
-            if ( (i[i.size()-1] == 'J') || (i[i.size()-1] == 'Q') || (i[i.size()-1] == 'K') || (i[i.size()-1] == '0')) {
+            if ( (i.rank == "J") || (i.rank == "Q") || (i.rank == "K") || (i.rank == "10")) {
                 sc += 10;
                 // cout << sc << "!!!!!!1"<<"\n";
             }
-            else if (i[i.size()-1] == 'A'){
+            else if (i.rank[0] == 'A'){
                 sc += 11;
                 num_A += 1;
                 // cout << sc << "!!!!!! 2"<<"\n";
@@ -65,7 +66,7 @@ using namespace std;
                 // int num = (int) (i[i.size()-1]-'0');
                 // num -= 48;
                 // int num = stoi(i[i.size()-1]);
-                sc += (int) (i[i.size()-1]-'0');
+                sc += (int) (i.rank[0]-'0');
                 
                 // cout << sc <<" "<< num<< " !!!!!!  3"<<"\n";
             }
@@ -80,6 +81,3 @@ using namespace std;
 
         return score;
     }
-
-// };
-// #endif
